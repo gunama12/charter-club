@@ -9,56 +9,75 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-
-let id = 0;
-function createData(name, calories, fat, carbs, protein) {
-  id += 1;
-  return { id, name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 
 class Inventory extends Component {
-  render() {
-  	const { classes } = this.props;
-  	return (
-  		<Grid item xs={12} container justify="center" direction="column" className={classes.paper}>
-	        <Typography variant="h5" component="h3">
-	          	Inventory
-	        </Typography>
-	        <Table className={classes.table}>
-	        	<TableHead>
-	          		<TableRow>
-	            		<TableCell>Dessert (100g serving)</TableCell>
-	            		<TableCell align="right">Calories</TableCell>
-	            		<TableCell align="right">Fat (g)</TableCell>
-	            		<TableCell align="right">Carbs (g)</TableCell>
-	            		<TableCell align="right">Protein (g)</TableCell>
-	          		</TableRow>
-	        	</TableHead>
-	        	<TableBody>
-				{rows.map(row => (
-					<TableRow key={row.id}>
-					    <TableCell component="th" scope="row">
-					        {row.name}
-					    </TableCell>
-			        	<TableCell align="right">{row.calories}</TableCell>
-		              	<TableCell align="right">{row.fat}</TableCell>
-					    <TableCell align="right">{row.carbs}</TableCell>
-				    	<TableCell align="right">{row.protein}</TableCell>
-					    </TableRow>
-				))}
-				</TableBody>
-			</Table>
-		</Grid>
-  	);
-  }
+	constructor(props){
+		super(props);
+		this.state = {
+			keyword: ""
+		};
+	}
+	handleKeywordChange = keyword => event => {
+	    this.setState({ [keyword]: event.target.value });
+	};
+	render() {
+	  	const { classes } = this.props;
+	  	let { vehicles } = this.props;
+	  	let dataToShow = [];
+	  	if(this.state.keyword !== ""){
+	  		dataToShow = vehicles.filter( (vehicle) => {
+		        return (vehicle.brand.toUpperCase().indexOf(this.state.keyword.toUpperCase()) !== -1) || 
+		        	   (vehicle.model.toUpperCase().indexOf(this.state.keyword.toUpperCase()) !== -1);
+		    });
+	  	}else{
+	  		dataToShow = vehicles;
+	  	}
+	  	return (
+	  		<Grid item xs={12} container justify="center" direction="column" className={classes.paper}>
+		        <Grid item container justify="space-between" direction="row" className={classes.paper}>
+			        <Typography variant="h5" component="h3">
+			          	Vehicle Inventory
+			       	</Typography>
+			       	<TextField
+				       	id="standard-search"
+				       	label="Search field"
+			          	type="search"
+			          	margin="normal"
+			          	value={this.state.keyword}
+	        			onChange={this.handleKeywordChange('keyword')}
+				    />
+				</Grid> 
+		        <Table className={classes.table}>
+		        	<TableHead>
+		          		<TableRow>
+		            		<TableCell>Brand</TableCell>
+		            		<TableCell align="right">Model</TableCell>
+		            		<TableCell align="right">Year</TableCell>
+		            		<TableCell align="right">Action</TableCell>
+		          		</TableRow>
+		        	</TableHead>
+		        	<TableBody>
+					{dataToShow.map(row => (
+						<TableRow key={row.id}>
+						    <TableCell component="th" scope="row">
+						        {row.brand}
+						    </TableCell>
+				        	<TableCell align="right">{row.model}</TableCell>
+			              	<TableCell align="right">{row.year}</TableCell>
+						    <TableCell align="right">
+						    	<Button variant="contained" color="secondary" className={classes.button}>
+								        Edit
+								</Button>
+						    </TableCell>
+						</TableRow>
+					))}
+					</TableBody>
+				</Table>
+			</Grid>
+	  	);
+	}
 }
 
 Inventory.propTypes = {

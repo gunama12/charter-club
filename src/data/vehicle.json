@@ -1,0 +1,20 @@
+{
+  	"data": [
+        { "id": 1, "brand": "Renault", "model":  "Clio" , "year": "2019"},
+        { "id": 2, "brand": "Peugeot", "model": "RCZ" , "year": "2010"},
+        { "id": 3, "brand": "Dacia", "model": "Sandero" , "year": "2018"},
+        { "id": 4, "brand": "Citroën", "model": "Xsara", "year": "2010"},
+        { "id": 5, "brand": "Opel", "model":"Vectra", "year": "2010"},
+        { "id": 6, "brand": "Alfa Romeo", "model": "159 Sportwagon", "year": "2016"},
+        { "id": 7, "brand": "Škoda", "model": "Fabia", "year": "2014"},
+        { "id": 8, "brand": "Chevrolet", "model":  "Aveo", "year": "2015"},
+        { "id": 9, "brand": "Porsche", "model": "911 Carrera", "year": "2018"},
+        { "id": 10, "brand": "Honda", "model": "Accord", "year": "2018"},
+        { "id": 11, "brand": "Subaru", "model": "Forester", "year": "2017"},
+        { "id": 12, "brand": "Mazda", "model": "323 Coupé", "year": "2016"},
+        { "id": 13, "brand": "Mitsubishi", "model": "3000 GT", "year": "2016"},
+        { "id": 14, "brand": "Lexus", "model": "RX 300", "year": "2019"},
+        { "id": 15, "brand": "Toyota", "model": "Camry", "year": "2014"},
+        { "id": 16, "brand": "Seat", "model": "Ibiza", "year": "2019"}
+    ]
+}

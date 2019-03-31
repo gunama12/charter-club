@@ -12,12 +12,14 @@ import Profile from './components/Profile';
 import { Link as RouterLink } from 'react-router-dom'
 import Link from '@material-ui/core/Link';
 import order from './data/order.json';
+import vehicle from './data/vehicle.json';
 
 class App extends Component {
 	constructor(props){
 		super(props);
 		this.state = {
-			orders: order.data	
+			orders: order.data,
+			vehicles: vehicle.data
 		};
 	}
 	handleAction = (status, id) => {
@@ -53,7 +55,7 @@ class App extends Component {
 			  			<Route 
 			  				path="/inventory" 
 			  				exact 
-			  				component={() => <Inventory/>}
+			  				component={() => <Inventory vehicles={this.state.vehicles}/>}
 			  			/>
 			  			<Route 
 			  				path="/profile" 
