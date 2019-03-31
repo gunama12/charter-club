@@ -34,10 +34,14 @@ class Dashboard extends Component {
   	render() {
 	  	const { classes } = this.props;
 		let { orders } = this.props;
+		for (var i = 0; i <  orders.length; i++) {
+			orders[i].vehicle = this.getVehicleDesc(orders[i].vehicle_id);
+		}
 	  	let dataToShow = [];
 	  	if(this.state.keyword !== ""){
 	  		dataToShow = orders.filter( (order) => {
-		        return (order.customer_name.toUpperCase().indexOf(this.state.keyword.toUpperCase()) !== -1);
+		        return (order.customer_name.toUpperCase().indexOf(this.state.keyword.toUpperCase()) !== -1) ||
+		        		(order.vehicle.toUpperCase().indexOf(this.state.keyword.toUpperCase()) !== -1);
 		    });
 	  	}else{
 	  		dataToShow = orders;
@@ -51,7 +55,7 @@ class Dashboard extends Component {
 		        	</Typography>
 		        	<TextField
 			         	id="standard-search"
-			          	label="Search field"
+			          	label="Search Customer/Vehicle"
 			          	type="search"
 			          	margin="normal"
 			          	value={this.state.keyword}
@@ -86,7 +90,7 @@ class Dashboard extends Component {
 							    <TableCell component="th" scope="row">
 							        {row.customer_name}
 							    </TableCell>
-					        	<TableCell align="right">{ this.getVehicleDesc(row.vehicle_id) }</TableCell>
+					        	<TableCell align="right">{ row.vehicle }</TableCell>
 				              	<TableCell align="right">{row.costs}</TableCell>
 							    <TableCell align="right">					    	
 							    	<Badge color={badgeColor} badgeContent={msg} classes={{ badge: classes.badge }} children=""/>

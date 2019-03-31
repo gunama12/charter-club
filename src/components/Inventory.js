@@ -31,7 +31,8 @@ class Inventory extends Component {
 	  	if(this.state.keyword !== ""){
 	  		dataToShow = vehicles.filter( (vehicle) => {
 		        return (vehicle.brand.toUpperCase().indexOf(this.state.keyword.toUpperCase()) !== -1) || 
-		        	   (vehicle.model.toUpperCase().indexOf(this.state.keyword.toUpperCase()) !== -1);
+		        	   (vehicle.model.toUpperCase().indexOf(this.state.keyword.toUpperCase()) !== -1) ||
+		        	   (vehicle.year.toUpperCase().indexOf(this.state.keyword.toUpperCase()) !== -1);
 		    });
 	  	}else{
 	  		dataToShow = vehicles;
@@ -44,7 +45,7 @@ class Inventory extends Component {
 			       	</Typography>
 			       	<TextField
 				       	id="standard-search"
-				       	label="Search field"
+				       	label="Search"
 			          	type="search"
 			          	margin="normal"
 			          	value={this.state.keyword}
