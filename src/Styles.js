@@ -1,4 +1,4 @@
-export const Styles = {
+export const Styles = theme => ({
   root: {
     flexGrow: 1,
   },
@@ -9,4 +9,10 @@ export const Styles = {
     marginLeft: -12,
     marginRight: 20,
   },
-};
+  paper: {
+    ...theme.mixins.gutters(),
+    paddingTop: theme.spacing.unit * 2,
+    paddingBottom: theme.spacing.unit * 2,
+    marginTop: 10
+  }
+});
