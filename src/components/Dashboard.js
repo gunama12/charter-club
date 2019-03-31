@@ -9,24 +9,12 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-
-let id = 0;
-function createData(name, calories, fat, carbs, protein) {
-  id += 1;
-  return { id, name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
+import Badge from '@material-ui/core/Badge';
+import Button from '@material-ui/core/Button';
 
 class Dashboard extends Component {
   render() {
-  	const { classes } = this.props;
+  	const { classes, orders } = this.props;
   	return (
   		<Grid item xs={12} container justify="center" direction="column" className={classes.paper}>
 	        <Typography variant="h5" component="h3">
@@ -35,25 +23,53 @@ class Dashboard extends Component {
 	        <Table className={classes.table}>
 	        	<TableHead>
 	          		<TableRow>
-	            		<TableCell>Dessert (100g serving)</TableCell>
-	            		<TableCell align="right">Calories</TableCell>
-	            		<TableCell align="right">Fat (g)</TableCell>
-	            		<TableCell align="right">Carbs (g)</TableCell>
-	            		<TableCell align="right">Protein (g)</TableCell>
+	            		<TableCell>Customer Name</TableCell>
+	            		<TableCell align="right">Vehicle ID</TableCell>
+	            		<TableCell align="right">Costs (SGD)</TableCell>
+	            		<TableCell align="right">Status</TableCell>
+	            		<TableCell align="right">Order Date</TableCell>
+	            		<TableCell align="right">Return Date</TableCell>
+	            		<TableCell align="right"></TableCell>
 	          		</TableRow>
 	        	</TableHead>
 	        	<TableBody>
-				{rows.map(row => (
-					<TableRow key={row.id}>
-					    <TableCell component="th" scope="row">
-					        {row.name}
-					    </TableCell>
-			        	<TableCell align="right">{row.calories}</TableCell>
-		              	<TableCell align="right">{row.fat}</TableCell>
-					    <TableCell align="right">{row.carbs}</TableCell>
-				    	<TableCell align="right">{row.protein}</TableCell>
-					    </TableRow>
-				))}
+				{orders.map(row => {
+					let msg = "Pending";
+					let badgeColor = "error";
+					if(row.status === 1){
+						msg = "Confirmed";
+						badgeColor = "secondary";
+					}else if(row.status === 2){
+						msg = "Rejected";
+						badgeColor = "primary";
+					}
+					return(
+						<TableRow key={row.id}>
+						    <TableCell component="th" scope="row">
+						        {row.customer_name}
+						    </TableCell>
+				        	<TableCell align="right">{row.vehicle_id}</TableCell>
+			              	<TableCell align="right">{row.costs}</TableCell>
+						    <TableCell align="right">					    	
+						    	<Badge color={badgeColor} badgeContent={msg} classes={{ badge: classes.badge }} children=""/>
+						    </TableCell>
+					    	<TableCell align="right">{row.order_date}</TableCell>
+					    	<TableCell align="right">{row.return_date}</TableCell>
+					    	<TableCell align="justify">
+					    		{ row.status !== 1 && row.status !== 2 &&
+					    		<Button variant="contained" color="secondary" className={classes.button}>
+							        Confirm
+							    </Button>
+								}
+							    { row.status !== 1 && row.status !== 2 &&  
+							    <Button variant="contained" color="primary" className={classes.button}>
+							        Reject
+							    </Button>
+								}
+					    	</TableCell>
+						</TableRow>
+					);
+				})}
 				</TableBody>
 			</Table>
 		</Grid>

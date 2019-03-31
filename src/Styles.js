@@ -17,5 +17,11 @@ export const Styles = theme => ({
   },
   link: {
     marginRight: 15
-  }
+  },
+  badge: {
+    padding: `0 ${theme.spacing.unit * 2}px`,
+  },
+  button: {
+    margin: theme.spacing.unit,
+  },
 });
