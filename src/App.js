@@ -13,13 +13,15 @@ import { Link as RouterLink } from 'react-router-dom'
 import Link from '@material-ui/core/Link';
 import order from './data/order.json';
 import vehicle from './data/vehicle.json';
+import profile from './data/profile.json';
 
 class App extends Component {
 	constructor(props){
 		super(props);
 		this.state = {
 			orders: order.data,
-			vehicles: vehicle.data
+			vehicles: vehicle.data,
+			profile: profile
 		};
 	}
 	handleAction = (status, id) => {
@@ -29,7 +31,17 @@ class App extends Component {
 		orders[index].status = status;
 		this.setState({
 			orders: orders
-		})
+		});
+	}
+	handleProfileSave = (name, email, address) => {
+		let profile = {
+			name: name, 
+			email: email, 
+			address: address
+		};
+		this.setState({
+			profile: profile
+		});
 	}
   	render() {
 	  	const { classes } = this.props;
@@ -43,7 +55,7 @@ class App extends Component {
 		          			</Typography>
 		          			<Link to='/' component={RouterLink} color="inherit" className={classes.link}>Dashboard</Link>
 		          			<Link to='/inventory' component={RouterLink} color="inherit" className={classes.link}>Inventory</Link>
-		        			<Link to='/profile' component={RouterLink} color="inherit" className={classes.link}>Profile</Link>
+		        			<Link to='/profile' component={RouterLink} color="inherit" className={classes.link}> | Hi, {this.state.profile.name}</Link>
 		        		</Toolbar>
 		      		</AppBar>     
 		      		<Switch>
@@ -60,7 +72,9 @@ class App extends Component {
 			  			<Route 
 			  				path="/profile" 
 			  				exact 
-			  				component={() => <Profile/>}
+			  				render={({ history }) => (
+									<Profile profile={this.state.profile} onProfileSave={this.handleProfileSave} history={history}/>
+							)}
 			  			/>
 					</Switch>  
 		    	</div>
