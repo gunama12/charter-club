@@ -20,6 +20,15 @@ class App extends Component {
 			orders: order.data	
 		};
 	}
+	handleAction = (status, id) => {
+		let orders = this.state.orders;
+		let index = orders.findIndex((obj => obj.id === id));
+		//update order status by index
+		orders[index].status = status;
+		this.setState({
+			orders: orders
+		})
+	}
   	render() {
 	  	const { classes } = this.props;
 	    return (
@@ -39,7 +48,7 @@ class App extends Component {
 			  			<Route 
 			  				path="/" 
 			  				exact 
-			  				component={() => <Dashboard orders={this.state.orders}/>}
+			  				component={() => <Dashboard orders={this.state.orders} onActionClick={this.handleAction}/>}
 			  			/>
 			  			<Route 
 			  				path="/inventory" 

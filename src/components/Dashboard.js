@@ -20,9 +20,13 @@ class Dashboard extends Component {
 			keyword: ""
 		};
 	}
-	handleChange = keyword => event => {
+	handleKeywordChange = keyword => event => {
 	    this.setState({ [keyword]: event.target.value });
 	};
+	handleAction(e, status, id) {
+	    e.preventDefault();
+	    this.props.onActionClick(status, id);
+	}
   	render() {
 	  	const { classes } = this.props;
 		let { orders } = this.props;
@@ -47,7 +51,7 @@ class Dashboard extends Component {
 			          	type="search"
 			          	margin="normal"
 			          	value={this.state.keyword}
-          				onChange={this.handleChange('keyword')}
+          				onChange={this.handleKeywordChange('keyword')}
 			        />
 				</Grid> 
 		        <Table className={classes.table}>
@@ -59,7 +63,7 @@ class Dashboard extends Component {
 		            		<TableCell align="right">Status</TableCell>
 		            		<TableCell align="right">Order Date</TableCell>
 		            		<TableCell align="right">Return Date</TableCell>
-		            		<TableCell align="right"></TableCell>
+		            		<TableCell align="center">Action</TableCell>
 		          		</TableRow>
 		        	</TableHead>
 		        	<TableBody>
@@ -87,12 +91,12 @@ class Dashboard extends Component {
 						    	<TableCell align="right">{row.return_date}</TableCell>
 						    	<TableCell align="justify">
 						    		{ row.status !== 1 && row.status !== 2 &&
-						    		<Button variant="contained" color="secondary" className={classes.button}>
+						    		<Button variant="contained" color="secondary" className={classes.button} onClick={(e) => this.handleAction(e, 1, row.id)}>
 								        Approve
 								    </Button>
 									}
 								    { row.status !== 1 && row.status !== 2 &&  
-								    <Button variant="contained" color="primary" className={classes.button}>
+								    <Button variant="contained" color="primary" className={classes.button} onClick={(e) => this.handleAction(e, 2, row.id)}>
 								        Reject
 								    </Button>
 									}
