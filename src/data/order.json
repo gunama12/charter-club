@@ -2,7 +2,7 @@
   	"data": [
     	{
     		"id": 1, 
-    		"customer_name": "Lorem",
+    		"customer_name": "Teodora",
     		"status": 0,
     		"vehicle_id": 1,
     		"costs": "50",
@@ -11,7 +11,7 @@
     	},
     	{
     		"id": 2, 
-    		"customer_name": "Ipsum",
+    		"customer_name": "Steffane",
     		"status": 1,
     		"vehicle_id": 1,
     		"costs": "50",
@@ -20,7 +20,7 @@
     	},
     	{
     		"id": 3, 
-    		"customer_name": "Dolor",
+    		"customer_name": "Dani",
     		"status": 2,
     		"vehicle_id": 1,
     		"costs": "50",
@@ -29,7 +29,7 @@
     	},
     	{
     		"id": 4, 
-    		"customer_name": "Sit Amet",
+    		"customer_name": "Cosetta",
     		"status": 0,
     		"vehicle_id": 1,
     		"costs": "50",
@@ -38,7 +38,7 @@
     	},
     	{
     		"id": 5, 
-    		"customer_name": "Lorem Ipsum",
+    		"customer_name": "Marylynne",
     		"status": 0,
     		"vehicle_id": 1,
     		"costs": "50",

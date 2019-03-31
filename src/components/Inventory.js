@@ -11,6 +11,8 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import { Link as RouterLink } from 'react-router-dom'
+import Link from '@material-ui/core/Link';
 
 class Inventory extends Component {
 	constructor(props){
@@ -67,9 +69,12 @@ class Inventory extends Component {
 				        	<TableCell align="right">{row.model}</TableCell>
 			              	<TableCell align="right">{row.year}</TableCell>
 						    <TableCell align="right">
+
+		          			<Link to={'/inventory-edit/'+row.id} component={RouterLink} color="inherit" >
 						    	<Button variant="contained" color="secondary" className={classes.button}>
 								        Edit
 								</Button>
+		          			</Link>
 						    </TableCell>
 						</TableRow>
 					))}

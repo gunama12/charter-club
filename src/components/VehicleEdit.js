@@ -7,72 +7,80 @@ import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
-class Profile extends Component {
+class VehicleEdit extends Component {
 	constructor(props){
 		super(props);
 		this.state = {
-			name: props.profile.name,
-			email: props.profile.email,
-			address: props.profile.address
+			brand: "",
+			model: "",
+			year: ""
 		};
+		this.params = this.props.params;
+	}
+	componentDidMount(){
+		let vehicle = this.props.vehicles.find(obj => obj.id == this.params.id);
+		this.setState({
+			brand: vehicle.brand,
+			model: vehicle.model,
+			year: vehicle.year	
+		})
 	}
 	handleSubmit = (event) => {
-		let { name, email, address } = this.state;
+		let { brand, model, year } = this.state;
 	    event.preventDefault();
-	    this.props.onProfileSave(name, email, address);
-	    //redirect to dashboard
-		this.props.history.push('/');
+	    this.props.onVehicleUpdate(parseInt(this.params.id), brand, model, year);
+	    //redirect to inventory
+		this.props.history.push('/inventory');
 	}
 	render() {
 	  	const { classes } = this.props;
 	  	return (
 	  		<Grid item xs={12} container justify="center" direction="column" className={classes.paper}>
 		        <Typography variant="h5" component="h3">
-		          	Profile
-		        </Typography>	
+		          	Edit Vehicle
+		        </Typography>		
 		        <form onSubmit={this.handleSubmit}>
 				    <TextField
-				        id="name"
-				        label="Name"
+				        id="brand"
+				        label="Brand"
 				        fullWidth
 				        margin="normal"		
-          				value={this.state.name}  
+          				value={this.state.brand}  
           				required   
-          				onChange={(event) => { this.setState({name: event.target.value}); }}   
+          				onChange={(event) => { this.setState({brand: event.target.value}); }}   
 			        />
 			        <TextField
-				        id="email"
-				        label="Email"
+				        id="model"
+				        label="Model"
 				        fullWidth
 				        margin="normal"		
-          				value={this.state.email} 
+          				value={this.state.model} 
           				required    
-          				onChange={(event) => { this.setState({email: event.target.value}); }}   
-          				type="email"
+          				onChange={(event) => { this.setState({model: event.target.value}); }}   
 			        />
 			        <TextField
-				        id="address"
-				        label="Address"
+				        id="year"
+				        label="Year"
 				        fullWidth
 				        margin="normal"		
-          				value={this.state.address}     
-          				onChange={(event) => { this.setState({address: event.target.value}); }}   
+          				value={this.state.year}     
+          				onChange={(event) => { this.setState({year: event.target.value}); }}   
 			        />
 			        <input type="submit" value="Submit" hidden ref={submit => this.submit = submit}/>
 				    <Button variant="contained" onClick={ () => this.submit.click() } className={classes.button}>
-				       	SAVE
-	               	</Button>
-	               	<Button variant="contained" color="primary" onClick={ () => this.props.history.goBack() } className={classes.button}>
+				        SAVE
+	                </Button>
+	                <Button variant="contained" color="primary" onClick={ () => this.props.history.goBack() } className={classes.button}>
 				        CANCEL
 	                </Button>						
-	 			</form>       
+	 			</form>  	        
 			</Grid>
 	  	);
 	  }
 }
 
-Profile.propTypes = {
+VehicleEdit.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(Styles)(Profile);
+export default withStyles(Styles)(VehicleEdit);

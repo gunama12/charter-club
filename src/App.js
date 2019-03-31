@@ -9,6 +9,7 @@ import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import Dashboard from './components/Dashboard';
 import Inventory from './components/Inventory';
 import Profile from './components/Profile';
+import VehicleEdit from './components/VehicleEdit';
 import { Link as RouterLink } from 'react-router-dom'
 import Link from '@material-ui/core/Link';
 import order from './data/order.json';
@@ -43,6 +44,17 @@ class App extends Component {
 			profile: profile
 		});
 	}
+	handleVehicleUpdate = (id, brand, model, year) => {
+		let vehicles = this.state.vehicles;
+		let index = vehicles.findIndex((obj => obj.id === id));
+		//update vehicle by index
+		vehicles[index].brand = brand;
+		vehicles[index].model = model;
+		vehicles[index].year = year;
+		this.setState({
+			vehicles: vehicles
+		});
+	}
   	render() {
 	  	const { classes } = this.props;
 	    return (
@@ -68,6 +80,18 @@ class App extends Component {
 			  				path="/inventory" 
 			  				exact 
 			  				component={() => <Inventory vehicles={this.state.vehicles}/>}
+			  			/>
+			  			<Route 
+			  				path="/inventory-edit/:id" 
+			  				exact 
+			  				component={(routerProps) => (	
+			  											<VehicleEdit 
+			  												params={routerProps.match.params} 
+			  												vehicles={this.state.vehicles} 
+			  												history={routerProps.history}
+			  												onVehicleUpdate={this.handleVehicleUpdate}
+			  											/>
+			  				)}
 			  			/>
 			  			<Route 
 			  				path="/profile" 
