@@ -15,6 +15,10 @@ import Link from '@material-ui/core/Link';
 import order from './data/order.json';
 import vehicle from './data/vehicle.json';
 import profile from './data/profile.json';
+import Dialog from '@material-ui/core/Dialog';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogActions from '@material-ui/core/DialogActions';
+import Button from '@material-ui/core/Button';
 
 class App extends Component {
 	constructor(props){
@@ -22,7 +26,9 @@ class App extends Component {
 		this.state = {
 			orders: order.data,
 			vehicles: vehicle.data,
-			profile: profile
+			profile: profile,
+			isDialogOpen: false,
+			dialogMessage: ""
 		};
 	}
 	handleAction = (status, id) => {
@@ -31,7 +37,9 @@ class App extends Component {
 		//update order status by index
 		orders[index].status = status;
 		this.setState({
-			orders: orders
+			orders: orders,
+			isDialogOpen: true,
+			dialogMessage: (status === 1 ? "Approve" : "Reject")+" Order success" 
 		});
 	}
 	handleProfileSave = (name, email, address) => {
@@ -41,7 +49,9 @@ class App extends Component {
 			address: address
 		};
 		this.setState({
-			profile: profile
+			profile: profile,
+			isDialogOpen: true,
+			dialogMessage: "Save Profile success"
 		});
 	}
 	handleVehicleUpdate = (id, brand, model, year) => {
@@ -52,14 +62,29 @@ class App extends Component {
 		vehicles[index].model = model;
 		vehicles[index].year = year;
 		this.setState({
-			vehicles: vehicles
+			vehicles: vehicles,
+			isDialogOpen: true,
+			dialogMessage: "Update Vehicle success"
 		});
 	}
+	handleDialogClose = () => {
+	    this.setState({
+	      	isDialogOpen: false,
+	    });
+	};
   	render() {
 	  	const { classes } = this.props;
 	    return (
 		    <BrowserRouter>
 		    	<div className={classes.root}>
+		    		 <Dialog open={this.state.isDialogOpen} onClose={this.handleDialogClose}>
+			          <DialogTitle>{this.state.dialogMessage}</DialogTitle>			          
+			          <DialogActions>
+			            <Button color="primary" onClick={this.handleDialogClose}>
+			              OK
+			            </Button>
+			          </DialogActions>
+			        </Dialog>
 		      		<AppBar position="static">
 		        		<Toolbar>
 		          			<Typography variant="h6" color="inherit" className={classes.grow}>
@@ -74,7 +99,7 @@ class App extends Component {
 			  			<Route 
 			  				path="/" 
 			  				exact 
-			  				component={() => <Dashboard orders={this.state.orders} onActionClick={this.handleAction}/>}
+			  				component={() => <Dashboard orders={this.state.orders} onActionClick={this.handleAction} vehicles={this.state.vehicles}/>}
 			  			/>
 			  			<Route 
 			  				path="/inventory" 

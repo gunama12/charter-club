@@ -5,7 +5,7 @@
     		"customer_name": "Teodora",
     		"status": 0,
     		"vehicle_id": 1,
-    		"costs": "50",
+    		"costs": "120",
     		"order_date": "2019-03-29",
     		"return_date": "2019-03-29"
     	},
@@ -13,7 +13,7 @@
     		"id": 2, 
     		"customer_name": "Steffane",
     		"status": 1,
-    		"vehicle_id": 1,
+    		"vehicle_id": 15,
     		"costs": "50",
     		"order_date": "2019-03-29",
     		"return_date": "2019-03-29"
@@ -22,8 +22,8 @@
     		"id": 3, 
     		"customer_name": "Dani",
     		"status": 2,
-    		"vehicle_id": 1,
-    		"costs": "50",
+    		"vehicle_id": 3,
+    		"costs": "40",
     		"order_date": "2019-03-29",
     		"return_date": "2019-03-29"
     	},
@@ -31,7 +31,7 @@
     		"id": 4, 
     		"customer_name": "Cosetta",
     		"status": 0,
-    		"vehicle_id": 1,
+    		"vehicle_id": 4,
     		"costs": "50",
     		"order_date": "2019-03-29",
     		"return_date": "2019-03-29"
@@ -40,10 +40,28 @@
     		"id": 5, 
     		"customer_name": "Marylynne",
     		"status": 0,
-    		"vehicle_id": 1,
-    		"costs": "50",
+    		"vehicle_id": 2,
+    		"costs": "80",
     		"order_date": "2019-03-29",
     		"return_date": "2019-03-29"
+    	},
+    	{
+    		"id": 6, 
+    		"customer_name": "Christine",
+    		"status": 0,
+    		"vehicle_id": 13,
+    		"costs": "210",
+    		"order_date": "2019-03-30",
+    		"return_date": "2019-03-31"
+    	},
+    	{
+    		"id": 7, 
+    		"customer_name": "Carolin",
+    		"status": 0,
+    		"vehicle_id": 15,
+    		"costs": "200",
+    		"order_date": "2019-03-30",
+    		"return_date": "2019-03-31"
     	}
    	]
 }

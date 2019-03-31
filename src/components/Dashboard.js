@@ -27,6 +27,10 @@ class Dashboard extends Component {
 	    e.preventDefault();
 	    this.props.onActionClick(status, id);
 	}
+	getVehicleDesc = (id) => {
+		let vehicle = this.props.vehicles.find((obj => obj.id === id));
+		return vehicle.brand+" "+vehicle.model;
+	}
   	render() {
 	  	const { classes } = this.props;
 		let { orders } = this.props;
@@ -58,7 +62,7 @@ class Dashboard extends Component {
 		        	<TableHead>
 		          		<TableRow>
 		            		<TableCell>Customer Name</TableCell>
-		            		<TableCell align="right">Vehicle ID</TableCell>
+		            		<TableCell align="right">Vehicle</TableCell>
 		            		<TableCell align="right">Costs (SGD)</TableCell>
 		            		<TableCell align="right">Status</TableCell>
 		            		<TableCell align="right">Order Date</TableCell>
@@ -82,7 +86,7 @@ class Dashboard extends Component {
 							    <TableCell component="th" scope="row">
 							        {row.customer_name}
 							    </TableCell>
-					        	<TableCell align="right">{row.vehicle_id}</TableCell>
+					        	<TableCell align="right">{ this.getVehicleDesc(row.vehicle_id) }</TableCell>
 				              	<TableCell align="right">{row.costs}</TableCell>
 							    <TableCell align="right">					    	
 							    	<Badge color={badgeColor} badgeContent={msg} classes={{ badge: classes.badge }} children=""/>
