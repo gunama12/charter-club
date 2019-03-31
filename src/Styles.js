@@ -14,5 +14,8 @@ export const Styles = theme => ({
     paddingTop: theme.spacing.unit * 2,
     paddingBottom: theme.spacing.unit * 2,
     marginTop: 10
+  },
+  link: {
+    marginRight: 15
   }
 });
